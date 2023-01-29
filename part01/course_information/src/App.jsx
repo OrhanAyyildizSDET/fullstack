@@ -22,7 +22,7 @@ const App = () => {
     <div>
       
       <Header title = {course}/>
-      <Content part = {parts}/>
+      <Content parts = {parts}/>
       <Total parts = {parts}/>   
 
     </div>

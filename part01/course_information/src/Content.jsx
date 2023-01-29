@@ -1,10 +1,9 @@
-const Content = ({part}) => { 
-  console.log(part)
+const Content = ({parts}) => { 
     return (
       <div>      
-        <p>{part[0].name} {part[0].exercises}</p>
-        <p>{part[1].name} {part[1].exercises}</p>
-        <p>{part[2].name} {part[2].exercises}</p>
+        <p>{parts[0].name} {parts[0].exercises}</p>
+        <p>{parts[1].name} {parts[1].exercises}</p>
+        <p>{parts[2].name} {parts[2].exercises}</p>
       </div>
     )
   }
