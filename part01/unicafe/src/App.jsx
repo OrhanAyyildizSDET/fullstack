@@ -1,16 +1,21 @@
 import { useState } from 'react'
 
 const Statistic = ({good,neutral,bad}) => {
-  return(
-    <div>
-        <p style={{marginRight:20}}>Good:{good}</p>
-        <p style={{marginRight:20}}>Neutral:{neutral}</p>
-        <p>Bad:{bad}</p>
-        <p>All:{good+bad+neutral}</p>
-        <p>Average:{(good+bad*-1)/(good+bad+neutral)}</p>
-        <p>Positive:{(good/(good+bad+neutral))*100} %</p>        
-    </div>      
-  )    
+  if((good+neutral+bad)>0)
+    return(
+      <div>
+          <p style={{marginRight:20}}>Good:{good}</p>
+          <p style={{marginRight:20}}>Neutral:{neutral}</p>
+          <p>Bad:{bad}</p>
+          <p>All:{good+bad+neutral}</p>
+          <p>Average:{(good+bad*-1)/(good+bad+neutral)}</p>
+          <p>Positive:{(good/(good+bad+neutral))*100} %</p>        
+      </div>      
+    )
+  else
+    return(  
+      <p>No feedback given</p>    
+    )
 } 
 
 const Button = (props) => {
