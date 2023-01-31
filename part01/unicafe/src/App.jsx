@@ -1,7 +1,15 @@
 import { useState } from 'react'
+
 const StatisticLine = ({text,value}) =>{
-  return(
-    <p>{text}:{value}</p>
+  return(     
+    <tr>
+      <td>
+        {text}:
+      </td>
+      <td>
+        {value}
+      </td>
+    </tr>    
   )
 }
 
@@ -20,10 +28,10 @@ const Statistic = ({good,neutral,bad}) => {
         <StatisticLine text="positive" value={positive}/>              
       </div>      
     )
-  else
-    return(  
-      <p>No feedback given</p>    
-    )
+  
+  return(  
+    <p>No feedback given</p>    
+  )
 } 
 
 const Button = (props) => {
