@@ -14,7 +14,7 @@ const App = () => {
     return(
       <h2>statistic</h2>
     )    
-  }
+  } 
 
   const Button = (props) => {
     return(
@@ -46,6 +46,9 @@ const App = () => {
         <p style={{marginRight:20}}>Good:{good}</p>
         <p style={{marginRight:20}}>Neutral:{neutral}</p>
         <p>Bad:{bad}</p>
+        <p>All:{good+bad+neutral}</p>
+        <p>Average:{(good+bad*-1)/(good+bad+neutral)}</p>
+        <p>Positive:{(good/(good+bad+neutral))*100} %</p>        
       </div>         
     </div>
   );
