@@ -45,7 +45,9 @@ function App() {
         <Button onClick={()=>vote(selected,votePoint,setVotePoint)} text="vote"/>
         <Button onClick={()=>nextAnectode(anecdotes.length,setSelected)}  text="next anecdote"/>        
       </div>    
-           
+      <h2>Anecdote with most votes</h2>
+      <p>{anecdotes[votePoint.indexOf(Math.max(...votePoint))]}</p>
+      <p>{votePoint[votePoint.indexOf(Math.max(...votePoint))]}</p>   
     </div>
   );
 }
