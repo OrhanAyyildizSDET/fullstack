@@ -38,13 +38,13 @@ function App() {
 
   return (
     <div>
+      <h2>Anecdote of the day</h2>
       <p>{anecdotes[selected]}</p>
       <ShowVote number={votePoint[selected]}/> 
       <div>
         <Button onClick={()=>vote(selected,votePoint,setVotePoint)} text="vote"/>
         <Button onClick={()=>nextAnectode(anecdotes.length,setSelected)}  text="next anecdote"/>        
-      </div>     
-      
+      </div>    
            
     </div>
   );
