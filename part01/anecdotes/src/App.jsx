@@ -47,7 +47,7 @@ function App() {
       </div>    
       <h2>Anecdote with most votes</h2>
       <p>{anecdotes[votePoint.indexOf(Math.max(...votePoint))]}</p>
-      <p>{votePoint[votePoint.indexOf(Math.max(...votePoint))]}</p>   
+      <p>has {votePoint[votePoint.indexOf(Math.max(...votePoint))]} votes</p>   
     </div>
   );
 }
