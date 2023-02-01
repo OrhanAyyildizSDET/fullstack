@@ -1,9 +1,20 @@
 import { useState } from 'react'
+
 const Button = ({onClick,text}) => {
   return(
-    <button onClick={onClick}>{text}</button>
-  )  
- 
+    <button style={{marginRight:10}} onClick={onClick}>{text}</button>
+  ) 
+}
+
+const ShowVote = ({number}) => {
+  return(
+    <p>has {number} votes</p>
+  )
+}
+
+function vote(selected,votePoint,setVotePoint){
+    votePoint[selected]+=1
+    setVotePoint(votePoint.concat())
 }
 
 function nextAnectode(length,setSelected){  
@@ -23,12 +34,18 @@ function App() {
   ]
 
   const [selected, setSelected] = useState(0)
+  const[votePoint,setVotePoint] = useState([1,3,4,2,11,0,8,10]) 
 
   return (
     <div>
       <p>{anecdotes[selected]}</p>
-      <Button onClick={()=>nextAnectode(anecdotes.length,setSelected)}  text="next anecdote"/>
+      <ShowVote number={votePoint[selected]}/> 
+      <div>
+        <Button onClick={()=>vote(selected,votePoint,setVotePoint)} text="vote"/>
+        <Button onClick={()=>nextAnectode(anecdotes.length,setSelected)}  text="next anecdote"/>        
+      </div>     
       
+           
     </div>
   );
 }
