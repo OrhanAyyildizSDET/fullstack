@@ -35,7 +35,6 @@ const PersonsForm = ({newPerson,setNewPerson,setPersons,persons}) =>{
             </div>
             <button type="submit">add</button>
             </form>
-            <h2>Numbers</h2>
         </div>
     )
 }

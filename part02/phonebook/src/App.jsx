@@ -1,21 +1,28 @@
-import { useState } from 'react'
+import { useState,useEffect} from 'react'
 import Persons from './components/persons'
 import PersonsFilter from './components/personsFilter'
 import PersonsForm from './components/personsForm'
-
-const users = [{ name: 'Arto Hellas', number: '040-123456'},
-{ name: 'Ada Lovelace', number: '39-44-5323523'},
-{ name: 'Dan Abramov', number: '12-43-234345'},
-{ name: 'Mary Poppendieck', number: '39-23-6423122'}]
+import axios from 'axios'
 
 const App = () => {
   const [findName, setFindName] = useState("")
-  const [persons, setPersons] = useState(users)
+  const [persons, setPersons] = useState([])
   const [newPerson, setNewPerson] = useState({name:"James Miller",number:"12-12314121"})
 
   const usersShow = persons.filter(user=>
     user.name.toLowerCase().includes(findName.toLowerCase())
   )  
+
+  const hook = () => {
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        console.log('promise fulfilled')
+        setPersons(persons.concat(response.data))
+      })
+  }
+  
+  useEffect(hook,[])
 
   return (
     <div>
