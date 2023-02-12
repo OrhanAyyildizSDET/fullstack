@@ -1,38 +1,30 @@
-import { useState,useEffect} from 'react'
-import Persons from './components/persons'
-import PersonsFilter from './components/personsFilter'
-import PersonsForm from './components/personsForm'
-import axios from 'axios'
+import { useState,useEffect } from 'react'
+import PersonsFilter from './components/personFilter'
+import PersonsForm from './components/personForm'
+import PersonShow from './components/personShow'
+import personsDb from './services/personsDb'
 
-const App = () => {
+function App() {
   const [findName, setFindName] = useState("")
   const [persons, setPersons] = useState([])
-  const [newPerson, setNewPerson] = useState({name:"James Miller",number:"12-12314121"})
+  const [newPerson, setNewPerson] = useState({name:"John Stone",number:"43-23265908"})
 
-  const usersShow = persons.filter(user=>
-    user.name.toLowerCase().includes(findName.toLowerCase())
-  )  
-
-  const hook = () => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        console.log('promise fulfilled')
-        setPersons(persons.concat(response.data))
-      })
+  const hook = ()=>{
+    personsDb.getAll()
+    .then(response=>{
+      setPersons(persons.concat(response))
+    })
   }
-  
+
   useEffect(hook,[])
 
+
   return (
-    <div>
-      <h2>Phonebook</h2>
+    <div> 
       <PersonsFilter findName={findName} setFindName={setFindName}/>
-      <PersonsForm newPerson={newPerson} setNewPerson={setNewPerson} setPersons={setPersons}
-        persons={persons}
-      />
-      <h2>Numbers</h2>
-      <Persons usersShow={usersShow}/>
+      <PersonsForm persons={persons} setPersons={setPersons} newPerson={newPerson}
+        setNewPerson={setNewPerson} personsLenght={persons.length}/>
+      <PersonShow persons={persons} findName={findName} setPersons={setPersons}/>
     </div>
   )
 }
