@@ -1,7 +1,7 @@
-import axios from 'axios'
 import personsDb from '../services/personsDb'
 
-const PersonsForm = ({newPerson,setNewPerson,setPersons,persons,personsLenght}) =>{
+const PersonsForm = ({newPerson,setNewPerson,setPersons,persons
+                      ,setErrorMessage}) =>{
     const addList = (event)=>{
         event.preventDefault()
         let a = persons.findIndex(x=>x.name===newPerson.name)
@@ -18,6 +18,7 @@ const PersonsForm = ({newPerson,setNewPerson,setPersons,persons,personsLenght}) 
 
                     personsDb.put(a+1,putData)
                     setPersons(persons.map(put=>put.id===persons[a].id?putData:put))
+                    setErrorMessage(`${newPerson.name}'s phone number updated as ${newPerson.number}` )                    
                 }
             }
         }
@@ -27,9 +28,8 @@ const PersonsForm = ({newPerson,setNewPerson,setPersons,persons,personsLenght}) 
 
         else{
             let personID
-            for(let i=1;i<personsLenght+1;i++){
+            for(let i=1;i<persons.length+1;i++){
                 let check=persons.findIndex((user)=>user.id===i)
-                console.log(i,check)
                 if(check===-1){                   
                     personID=i
                     break
@@ -44,8 +44,9 @@ const PersonsForm = ({newPerson,setNewPerson,setPersons,persons,personsLenght}) 
          
             personsDb.create(newPersonObject)
             .then(response=>{
-                setPersons(persons.concat(newPersonObject))
+                setPersons(persons.concat(response))
                 setNewPerson(newPerson=>({...newPerson,name:"",number:""}))
+                setErrorMessage(`Added ${newPerson.name} with ${newPerson.number} phone number`)
             })            
         }
     }
@@ -57,14 +58,13 @@ const PersonsForm = ({newPerson,setNewPerson,setPersons,persons,personsLenght}) 
     return(
         <div>
             <form onSubmit={addList}>
-            <div>
-            name: <input value={newPerson.name} onChange={(e)=>handleChangePerson(e,"name")}/>
-            </div>
-            <div>
-            number:<input value={newPerson.number} onChange={(e)=>handleChangePerson(e,"number")}/>
-            </div>
-            <button style={{backgroundColor:'black',background:'lightgreen',
-                            borderRadius:"10px",marginTop:"20px"}} type="submit">add or update</button>
+                <div>
+                name: <input value={newPerson.name} onChange={(e)=>handleChangePerson(e,"name")}/>
+                </div>
+                <div>
+                number:<input value={newPerson.number} onChange={(e)=>handleChangePerson(e,"number")}/>
+                </div>
+                <button className='addButton' type="submit">add or update</button>
             </form>
         </div>
     )

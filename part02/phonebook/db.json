@@ -6,8 +6,8 @@
       "id": 1
     },
     {
-      "name": "Dan Abramov",
-      "number": "12-43-234345",
+      "name": "Jane Austen",
+      "number": "1-45-6153722",
       "id": 2
     },
     {
@@ -19,11 +19,6 @@
       "name": "James Miller",
       "number": "12-12314121",
       "id": 4
-    },
-    {
-      "name": "John Stone",
-      "number": "43-232659089",
-      "id": 5
     }
   ]
 }
