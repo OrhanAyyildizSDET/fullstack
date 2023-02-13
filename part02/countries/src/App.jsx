@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">      
       <FilterCountries setCountries={setCountries}/>
-      <ShowCountries countries={countries}/>        
+      <ShowCountries countries={countries} setCountries={setCountries}/>        
     </div>
   )
 }
