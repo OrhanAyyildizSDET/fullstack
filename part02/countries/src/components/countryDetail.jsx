@@ -1,8 +1,8 @@
 const CountryDetail=({countryDeep})=>{
-    console.log(countryDeep)
+
     return(
         <div> 
-            <h1>{countryDeep[0].name.common}</h1>
+            <h1 style={{color:"black"}}>{countryDeep[0].name.common}</h1>
             <p>capital {countryDeep[0].capital[0]}</p>
             <p>area {countryDeep[0].area}</p>
             <h2>languages:</h2>

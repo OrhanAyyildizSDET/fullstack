@@ -19,17 +19,17 @@ const ShowCountries=({countries,setCountries})=>{
             return(
                 <div>            
                     {countries.map((country,i)=>(
-                    <p style={{color:"red"}} key={i}>country name : 
-                        <strong>
+                    <p className="countryName" key={i}>country name : 
+                        <strong style={{color:"gold"}}>
                         {country.name.common}
                         </strong> 
-                        <button style={{backgroundColor:"deepskyblue",marginLeft:10}} onClick={()=>show(country.name.common)}>show</button>
+                        <button className="showButton" onClick={()=>show(country.name.common)}>show</button>
                     </p>))}            
                 </div>
             )
         }
 
-        else{           
+        else{   
             return(
                 <div>
                     <CountryDetail countryDeep={countries}/>
