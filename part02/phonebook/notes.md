@@ -1,4 +1,4 @@
-1. npx json-server --port 3001 --watch db.json for form a db.json file without global.
+1. "npx json-server --port 3001 --watch db.json" for form a db.json file without global.
 
 2. npm install axios for install axios fetch
 

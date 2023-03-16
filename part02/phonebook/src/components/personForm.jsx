@@ -9,44 +9,37 @@ const PersonsForm = ({newPerson,setNewPerson,setPersons,persons
        
         if(a!=-1){
             if(b!=-1)                
-                alert(`${newPerson.name} and ${newPerson.number} is already added to phonebook`)
+                setErrorMessage(`${newPerson.name} and ${newPerson.number} is already added to phonebook`)
             else{
                 let confirm=window.confirm(`Do you want to update ${newPerson.name}'s number with ${newPerson.number}`)
                 if(confirm){
                     const putData={"name":newPerson.name,
-                    "number":newPerson.number,"id":persons[a].id}
+                    "number":newPerson.number}
 
-                    personsDb.put(a+1,putData)
+                    personsDb.update(persons[a].id,putData)
+                    .catch(error=>{
+                        setErrorMessage(error.response.data.error)
+                    })
                     setPersons(persons.map(put=>put.id===persons[a].id?putData:put))
                     setErrorMessage(`${newPerson.name}'s phone number updated as ${newPerson.number}` )                    
                 }
             }
         }
 
-        else if(newPerson.name==="")
-            alert("You can not add empty name field!!!!!!")
-
         else{
-            let personID
-            for(let i=1;i<persons.length+1;i++){
-                let check=persons.findIndex((user)=>user.id===i)
-                if(check===-1){                   
-                    personID=i
-                    break
-                }
-            }
-
             const newPersonObject = {
                 name:newPerson.name,
                 number:newPerson.number,
-                id:personID
-            }         
-         
+            }   
+
             personsDb.create(newPersonObject)
             .then(response=>{
                 setPersons(persons.concat(response))
                 setNewPerson(newPerson=>({...newPerson,name:"",number:""}))
                 setErrorMessage(`Added ${newPerson.name} with ${newPerson.number} phone number`)
+            }).catch(error=>{
+                console.log(error.response.data)
+                setErrorMessage(error.response.data.error)                
             })            
         }
     }

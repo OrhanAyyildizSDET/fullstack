@@ -4,8 +4,7 @@ const PersonShow = ({persons,findName,setPersons,setErrorMessage}) => {
       
     const usersShow = persons.filter((user)=>user.name.toLowerCase().includes(findName.toLowerCase())) 
 
-    function deletePerson(index,personName){
-        let copyName=personName
+    const deletePerson = (index,personName)=>{
         let confirm=window.confirm(`Are you sure about delete ${personName}?`)
         if(confirm)
             personsDb.deletePerson(index).then(response=>{
@@ -14,17 +13,15 @@ const PersonShow = ({persons,findName,setPersons,setErrorMessage}) => {
             })
             .catch(error => {
                 alert(
-                  `the person '${copyName}' was already deleted from server`
+                  `the person '${personName}' was already deleted from server`
                 )
-                copyName=""
-                setPersons(notes.filter(n => n.id !== id))
               })
     }
 
     return(
         <div>
-             {usersShow.map((name,i)=><p key={i}>{name.name} {0+name.number} 
-             <button className="deleteButton" onClick={()=>deletePerson(i+1,name.name)}>delete</button></p>)}
+             {usersShow.map(name=><p key={name.id}>{name.name} {0+name.number} 
+             <button className="deleteButton" onClick={()=>deletePerson(name.id,name.name)}>delete</button></p>)}
         </div>     
     )
 }
