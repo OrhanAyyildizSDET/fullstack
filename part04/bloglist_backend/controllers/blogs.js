@@ -2,7 +2,7 @@ const blogRouter = require('express').Router()
 const Blog = require('../models/blog')
 
 blogRouter.get('/', (request, response) => {
-  Blogger.find({}).then(blogs => {
+  Blog.find({}).then(blogs => {
     response.json(blogs)
   })
 })
@@ -21,12 +21,16 @@ blogRouter.get('/:id', (request, response, next) => {
 
 blogRouter.post('/', (request, response, next) => {
   const body = request.body
-
+  if (!body.title) {
+    return response.status(400).json({
+      error: 'TitleMissing'
+    })
+  }
   const blog = new Blog({
     title: body.title,
     author: body.author,
     url: body.url,
-    likes: body.likes
+    likes: body.likes?body.likes:0
   })
 
   blog.save()
@@ -49,7 +53,7 @@ blogRouter.put('/:id', (request, response, next) => {
 
   const blog = {
     content: body.content,
-    important: body.important,
+    important: body.important
   }
 
   Blog.findByIdAndUpdate(request.params.id, blog, { new: true })

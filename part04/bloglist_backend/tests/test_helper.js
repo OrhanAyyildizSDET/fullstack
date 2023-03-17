@@ -1,6 +1,6 @@
-const listHelper = require('../utils/list_helper')
+const Blog = require('../models/blog')
 
-const blogs = [
+const initialBlogs = [
   {
     _id: '5a422a851b54a676234d17f7',
     title: 'React patterns',
@@ -51,50 +51,12 @@ const blogs = [
   }
 ]
 
-test('dummy returns one', () => {
-  const blogs = []
+const blogsInDb = async () => {
+  const blogs = await Blog.find({})
+  return blogs.map(blog => blog.toJSON())
 
-  const result = listHelper.dummy(blogs)
-  expect(result).toBe(1)
-})
+}
 
-describe('total likes', () => {
-  test('total likes', () => {
-    const result = listHelper.totalLike(blogs)
-    expect(result).toBe(36)
-  })
-})
-
-describe('Most favoried writer', () => {
-  test('most favoried writer is', () => {
-    const result = listHelper.mostFavoried(blogs)
-    expect(result).toEqual({
-      title: 'Canonical string reduction',
-      author: 'Edsger W. Dijkstra',
-      likes: 12
-    }
-    )
-  })
-})
-
-describe('Most blogged author', () => {
-  test('most blogs', () => {
-    const result = listHelper.mostBlogs(blogs)
-    expect(result).toEqual({
-      author: 'Robert C. Martin',
-      blogCount: 3
-    }
-    )
-  })
-})
-
-describe('Total liked author', () => {
-  test('total likes', () => {
-    const result = listHelper.mostLikes(blogs)
-    expect(result).toEqual({
-      author: 'Edsger W. Dijkstra',
-      likes: 17
-    }
-    )
-  })
-})
+module.exports = {
+  blogsInDb, initialBlogs
+}
